@@ -2,7 +2,7 @@ namespace ShedAndFed.Entities;
 
 public abstract class ReptileLogBase
 {
-    public Guid Id { get; set; }
+    public int LogId { get; set; }
 
     public DateTime Date { get; set; }
 

@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using ShedAndFed.Components;
 using ShedAndFed.Data;
+using ShedAndFed.ServiceContracts;
+using ShedAndFed.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,16 +14,18 @@ var connectionString =
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ReptileDbContext>(options => options.UseSqlite(connectionString));
 
+builder.Services.AddScoped<IReptileService, ReptileService>();
+
 var app = builder.Build();
 
-// Initialize and seed the database
-using (var scope = app.Services.CreateAsyncScope())
+// Initialize the database
+using (var scope = app.Services.CreateScope())
 {
-    var services = scope.ServiceProvider;
+    var db = scope.ServiceProvider.GetRequiredService<ReptileDbContext>();
     try
     {
-        // await SeedData.InitializeDataAsync(services);
-        app.Logger.LogInformation("Seeding database succeeded.");
+        db.Database.Migrate();
+        app.Logger.LogInformation("Database migrated successfully.");
     }
     catch (Exception e)
     {

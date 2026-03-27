@@ -2,7 +2,7 @@ namespace ShedAndFed.ServiceContracts.DTOs.ReptileDTOs;
 
 public class UpdateReptileRequest
 {
-    public Guid Id { get; set; }
+    public int ReptileId { get; set; }
 
     public string Name { get; set; } = string.Empty;
 

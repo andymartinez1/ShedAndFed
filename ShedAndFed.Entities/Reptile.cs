@@ -2,7 +2,7 @@
 
 public class Reptile
 {
-    public Guid Id { get; set; }
+    public int ReptileId { get; set; }
 
     public string Name { get; set; } = string.Empty;
 
