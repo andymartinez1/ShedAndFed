@@ -1,6 +1,19 @@
 ﻿@inherits LayoutComponentBase
 
-@Body
+<nav class="navbar">
+    <a class="navbar-brand" href="/">
+        <i class="bi bi-egg-fried"></i> Shed&Fed
+    </a>
+    <div class="navbar-links">
+        <a href="/reptiles"><i class="bi bi-grid"></i> My Reptiles</a>
+        <a href="/feedings"><i class="bi bi-basket2"></i> Feedings</a>
+        <a href="/sheds"><i class="bi bi-layers"></i> Sheds</a>
+    </div>
+</nav>
+
+<main class="main-content">
+    @Body
+</main>
 
 <div id="blazor-error-ui" data-nosnippet>
     An unhandled error has occurred.

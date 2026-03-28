@@ -1,7 +1,48 @@
 ﻿@page "/"
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Shed&Fed — Reptile Care Tracker</PageTitle>
 
-<h1>Hello, world!</h1>
+<div class="hero">
+    <div class="hero-content">
+        <span class="hero-badge">🦎 Reptile Care Tracker</span>
+        <h1>Keep your reptiles<br/><span class="hero-accent">healthy & on track</span></h1>
+        <p class="hero-sub">Log feedings, sheds, and waste events for all your reptiles in one place. Never miss a meal
+            or a moult again.</p>
+        <div class="hero-actions">
+            <a href="/reptiles" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Manage Reptiles
+            </a>
+            <a href="/feedings" class="btn btn-outline">
+                <i class="bi bi-clock-history"></i> View Logs
+            </a>
+        </div>
+    </div>
+    <div class="hero-illustration">🐍</div>
+</div>
 
-Welcome to your new app.
+<section class="features">
+    <div class="feature-card">
+        <div class="feature-icon feeding">
+            <i class="bi bi-basket2-fill"></i>
+        </div>
+        <h3>Feeding Logs</h3>
+        <p>Record food type, size, and whether it was eaten. Track feeding success over time.</p>
+        <a href="/feedings" class="feature-link">Go to feedings <i class="bi bi-arrow-right"></i></a>
+    </div>
+    <div class="feature-card">
+        <div class="feature-icon shed">
+            <i class="bi bi-layers-fill"></i>
+        </div>
+        <h3>Shed Tracking</h3>
+        <p>Log every shed event and note whether it was a complete or incomplete shed.</p>
+        <a href="/sheds" class="feature-link">Go to sheds <i class="bi bi-arrow-right"></i></a>
+    </div>
+    <div class="feature-card">
+        <div class="feature-icon waste">
+            <i class="bi bi-droplet-fill"></i>
+        </div>
+        <h3>Waste Logs</h3>
+        <p>Keep an eye on waste patterns — an easy health indicator for your animals.</p>
+        <a href="/wastes" class="feature-link">Go to waste logs <i class="bi bi-arrow-right"></i></a>
+    </div>
+</section>
