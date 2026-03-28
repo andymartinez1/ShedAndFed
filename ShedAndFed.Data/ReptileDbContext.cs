@@ -19,6 +19,10 @@ public class ReptileDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
+        modelBuilder.Entity<FeedingLog>().HasKey(f => f.LogId);
+        modelBuilder.Entity<ShedLog>().HasKey(s => s.LogId);
+        modelBuilder.Entity<WasteLog>().HasKey(w => w.LogId);
+
         modelBuilder.Entity<Reptile>(entity =>
         {
             entity.HasKey(r => r.ReptileId);

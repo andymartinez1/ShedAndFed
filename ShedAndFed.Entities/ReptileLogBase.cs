@@ -8,7 +8,7 @@ public abstract class ReptileLogBase
 
     public string Notes { get; set; } = string.Empty;
 
-    public Guid ReptileId { get; set; }
+    public int ReptileId { get; set; }
 
     public Reptile Reptile { get; set; } = null!;
 }
