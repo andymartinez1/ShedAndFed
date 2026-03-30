@@ -145,6 +145,12 @@ h1:focus {
     user-select: none;
 }
 
+.hero-svg {
+    width: 220px;
+    height: 220px;
+    filter: drop-shadow(0 0 30px #4caf5044);
+}
+
 /* ── Buttons ── */
 .btn {
     display: inline-flex;
