@@ -1,4 +1,4 @@
-# ShedAndFed
+# Shed & Fed
 
 ShedAndFed is an ASP.NET Core Blazor Server application for tracking reptile care history in one place.  
 It is designed to help keepers manage reptile profiles and care logs such as feedings, sheds, and waste events.
