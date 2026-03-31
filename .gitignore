@@ -369,7 +369,6 @@ FodyWeavers.xsd
 .idea/
 
 # Data
-IronForge.db
-IronForge.db-shm
-IronForge.db-wal
+app.db-shm
+App.db-wal
 identifier.sqlite

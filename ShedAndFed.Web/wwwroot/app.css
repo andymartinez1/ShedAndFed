@@ -260,6 +260,254 @@ h1:focus {
     gap: .6rem;
 }
 
+/* ── Reptile Pages ── */
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.page-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin-bottom: .25rem;
+}
+
+    .page-title i {
+        color: var(--accent);
+    }
+
+.page-subtitle {
+    color: var(--text-muted);
+    font-size: .92rem;
+}
+
+/* ── Empty State ── */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    background: var(--surface);
+    border: 1px dashed var(--border);
+    border-radius: var(--radius);
+    gap: 1rem;
+}
+
+.empty-state-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--accent-glow);
+    border: 1px solid var(--accent-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--accent);
+    margin-bottom: .5rem;
+}
+
+.empty-state h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.empty-state p {
+    color: var(--text-muted);
+    max-width: 380px;
+    font-size: .95rem;
+}
+
+/* ── Reptile Table ── */
+.table-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+.reptile-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .92rem;
+}
+
+    .reptile-table thead {
+        background: var(--surface-2);
+        border-bottom: 1px solid var(--border);
+    }
+
+    .reptile-table th {
+        padding: .85rem 1.1rem;
+        text-align: left;
+        font-weight: 600;
+        font-size: .8rem;
+        text-transform: uppercase;
+        letter-spacing: .06em;
+        color: var(--text-muted);
+        white-space: nowrap;
+    }
+
+    .reptile-table td {
+        padding: .9rem 1.1rem;
+        border-bottom: 1px solid var(--border);
+        color: var(--text);
+    }
+
+    .reptile-table tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    .reptile-table tbody tr {
+        transition: background .15s;
+    }
+
+        .reptile-table tbody tr:hover {
+            background: var(--surface-2);
+        }
+
+.reptile-name {
+    font-weight: 600;
+    color: var(--accent) !important;
+}
+
+.table-actions {
+    display: flex;
+    gap: .5rem;
+    justify-content: flex-end;
+}
+
+.btn-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    font-size: .95rem;
+    transition: all .2s;
+}
+
+    .btn-icon:hover {
+        color: var(--accent);
+        border-color: var(--accent-dim);
+        background: var(--accent-glow);
+    }
+
+/* ── Form ── */
+.form-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+.form-section {
+    padding: 1.75rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.form-section-title {
+    font-size: .8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+}
+
+.form-label {
+    font-size: .88rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.required {
+    color: var(--accent);
+}
+
+.form-input,
+.form-select {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    padding: .6rem .85rem;
+    font-size: .93rem;
+    font-family: inherit;
+    transition: border-color .2s, box-shadow .2s;
+    width: 100%;
+}
+
+    .form-input:focus,
+    .form-select:focus {
+        outline: none;
+        border-color: var(--accent-dim);
+        box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .form-input::placeholder {
+        color: var(--text-muted);
+        opacity: .6;
+    }
+
+.form-textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.form-check {
+    display: inline-flex;
+    align-items: center;
+    gap: .6rem;
+    margin-top: 1.1rem;
+    font-size: .93rem;
+    cursor: pointer;
+    color: var(--text);
+    user-select: none;
+}
+
+    .form-check input[type="checkbox"] {
+        accent-color: var(--accent);
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+    }
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .75rem;
+    padding: 1.25rem 1.75rem;
+    background: var(--surface-2);
+    border-top: 1px solid var(--border);
+}
+
 /* ── Blazor utilities ── */
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;

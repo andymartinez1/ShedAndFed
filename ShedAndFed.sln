@@ -1,5 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11620.152 stable
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShedAndFed.Web", "ShedAndFed.Web\ShedAndFed.Web.csproj", "{DB93841C-777D-44C5-9538-3C25F5D5DE1F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShedAndFed.Entities", "ShedAndFed.Entities\ShedAndFed.Entities.csproj", "{EC55B11F-BAFC-4B5C-8CD8-7DC67E8B736C}"
@@ -36,5 +39,11 @@ Global
 		{104AB9EA-DE60-41BC-84C9-947E170BEBDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{104AB9EA-DE60-41BC-84C9-947E170BEBDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{104AB9EA-DE60-41BC-84C9-947E170BEBDF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5969DAB4-F475-4AFF-A851-B872223F4FEB}
 	EndGlobalSection
 EndGlobal

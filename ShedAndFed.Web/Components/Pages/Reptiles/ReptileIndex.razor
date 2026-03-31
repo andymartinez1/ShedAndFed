@@ -1,0 +1,88 @@
+﻿@page "/reptiles"
+@inject IReptileService ReptileService
+@rendermode InteractiveAuto
+
+<PageTitle>Reptiles</PageTitle>
+
+<div class="page-header">
+    <div>
+        <h2 class="page-title"><i class="bi bi-bug"></i> My Reptiles</h2>
+        <p class="page-subtitle">Manage your reptile collection</p>
+    </div>
+    <a href="/reptiles/create" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> Add Reptile
+    </a>
+</div>
+
+@if (Reptiles is null)
+{
+    <div class="empty-state">
+        <div class="empty-state-icon">
+            <i class="bi bi-hourglass-split"></i>
+        </div>
+        <h3>Loading...</h3>
+    </div>
+}
+else if (!Reptiles.Any())
+{
+    <div class="empty-state">
+        <div class="empty-state-icon">
+            <i class="bi bi-bug"></i>
+        </div>
+        <h3>No reptiles yet</h3>
+        <p>Add your first reptile to get started tracking feedings, sheds, and more.</p>
+        <a href="/reptiles/create" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Add Your First Reptile
+        </a>
+    </div>
+}
+else
+{
+    <div class="table-card">
+        <table class="reptile-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Species</th>
+                    <th>Morph</th>
+                    <th>Sex</th>
+                    <th>Date of Birth</th>
+                    <th>Weight (g)</th>
+                    <th>Length (cm)</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var reptile in Reptiles)
+                {
+                    <tr>
+                        <td class="reptile-name">@reptile.Name</td>
+                        <td>@reptile.Species</td>
+                        <td>@(reptile.Morph is { Length: > 0 } ? reptile.Morph : "—")</td>
+                        <td>@(reptile.Sex ?? "—")</td>
+                        <td>@(reptile.DateOfBirth?.ToString("MMM d, yyyy") ?? "—")</td>
+                        <td>@(reptile.WeightGrams?.ToString("0.#") ?? "—")</td>
+                        <td>@(reptile.LengthCm?.ToString("0.#") ?? "—")</td>
+                        <td class="table-actions">
+                            <a href="/reptiles/@reptile.ReptileId" class="btn-icon" title="View">
+                                <i class="bi bi-eye"></i>
+                            </a>
+                            <a href="/reptiles/@reptile.ReptileId/edit" class="btn-icon" title="Edit">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+@code {
+    List<ReptileResponse> Reptiles { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Reptiles = await ReptileService.GetAllAsync();
+    }
+}

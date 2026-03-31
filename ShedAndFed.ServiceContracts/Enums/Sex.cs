@@ -2,7 +2,7 @@
 
 public enum Sex
 {
-    Other,
+    Unknown,
     Male,
     Female
 }
