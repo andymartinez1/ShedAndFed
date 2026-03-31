@@ -5,7 +5,7 @@ namespace ShedAndFed.Data;
 
 public class ReptileDbContext : DbContext
 {
-    public ReptileDbContext(DbContextOptions options)
+    public ReptileDbContext(DbContextOptions<ReptileDbContext> options)
         : base(options)
     {
     }
@@ -19,6 +19,7 @@ public class ReptileDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
+        // Key explicitly specified because of the abstract ReptileLogBase entity
         modelBuilder.Entity<FeedingLog>().HasKey(f => f.LogId);
         modelBuilder.Entity<ShedLog>().HasKey(s => s.LogId);
         modelBuilder.Entity<WasteLog>().HasKey(w => w.LogId);

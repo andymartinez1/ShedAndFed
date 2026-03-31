@@ -11,7 +11,7 @@ using ShedAndFed.Data;
 namespace ShedAndFed.Data.Migrations
 {
     [DbContext(typeof(ReptileDbContext))]
-    [Migration("20260329213503_Initial")]
+    [Migration("20260331124216_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -68,15 +68,6 @@ namespace ShedAndFed.Data.Migrations
 
                     b.Property<bool>("IsAlive")
                         .HasColumnType("INTEGER");
-
-                    b.Property<DateTime?>("LastFed")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("LastPooped")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("LastShed")
-                        .HasColumnType("TEXT");
 
                     b.Property<double?>("LengthCm")
                         .HasColumnType("REAL");

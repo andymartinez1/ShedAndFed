@@ -66,15 +66,6 @@ namespace ShedAndFed.Data.Migrations
                     b.Property<bool>("IsAlive")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime?>("LastFed")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("LastPooped")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("LastShed")
-                        .HasColumnType("TEXT");
-
                     b.Property<double?>("LengthCm")
                         .HasColumnType("REAL");
 

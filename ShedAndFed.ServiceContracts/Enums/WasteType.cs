@@ -4,5 +4,5 @@ public enum WasteType
 {
     Poop,
     Urate,
-    Both,
+    Both
 }

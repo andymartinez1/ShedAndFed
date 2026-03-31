@@ -6,8 +6,6 @@ public interface ICrudService<TCreate, TUpdate, TResponse, TKey> where TKey : no
 
     Task<TResponse?> GetByIdAsync(TKey id);
 
-    Task<List<TResponse>> GetAllAsync();
-
     Task<TResponse?> UpdateAsync(TUpdate request);
 
     Task<bool> DeleteAsync(TKey id);

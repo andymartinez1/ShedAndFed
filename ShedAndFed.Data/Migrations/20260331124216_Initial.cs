@@ -26,10 +26,7 @@ namespace ShedAndFed.Data.Migrations
                     WeightGrams = table.Column<double>(type: "REAL", nullable: true),
                     LengthCm = table.Column<double>(type: "REAL", nullable: true),
                     IsAlive = table.Column<bool>(type: "INTEGER", nullable: false),
-                    Notes = table.Column<string>(type: "TEXT", nullable: true),
-                    LastFed = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    LastShed = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    LastPooped = table.Column<DateTime>(type: "TEXT", nullable: true)
+                    Notes = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {

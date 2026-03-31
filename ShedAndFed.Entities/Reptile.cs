@@ -24,12 +24,6 @@ public class Reptile
 
     public string? Notes { get; set; } = string.Empty;
 
-    public DateTime? LastFed { get; set; }
-
-    public DateTime? LastShed { get; set; }
-
-    public DateTime? LastPooped { get; set; }
-
     public List<FeedingLog> Feedings { get; set; } = [];
 
     public List<ShedLog> Sheds { get; set; } = [];
