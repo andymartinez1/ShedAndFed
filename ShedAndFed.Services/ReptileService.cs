@@ -18,7 +18,7 @@ public class ReptileService : IReptileService
         _logger = logger;
     }
 
-    public async Task<ReptileResponse> CreateAsync(AddReptileRequest request)
+    public async Task<ReptileResponse> CreateAsync(CreateReptileRequest request)
     {
         var reptile = MapToReptile(request);
 
@@ -68,14 +68,14 @@ public class ReptileService : IReptileService
         reptile.Name = request.Name;
         reptile.Species = request.Species;
         reptile.Morph = request.Morph;
-        reptile.Sex = request.Sex;
+        reptile.Sex = request.Sex.ToString();
         reptile.DateOfBirth = request.DateOfBirth;
         reptile.AcquiredDate = request.AcquiredDate;
         reptile.WeightGrams = request.WeightGrams;
         reptile.LengthCm = request.LengthCm;
         reptile.IsAlive = request.IsAlive;
         reptile.Notes = request.Notes;
-        
+
         try
         {
             await _context.SaveChangesAsync();
@@ -122,14 +122,14 @@ public class ReptileService : IReptileService
         return true;
     }
 
-    private Reptile MapToReptile(AddReptileRequest reptileRequest)
+    private Reptile MapToReptile(CreateReptileRequest reptileRequest)
     {
         return new Reptile
         {
             Name = reptileRequest.Name,
             Species = reptileRequest.Species,
             Morph = reptileRequest.Morph,
-            Sex = reptileRequest.Sex,
+            Sex = reptileRequest.Sex.ToString(),
             DateOfBirth = reptileRequest.DateOfBirth,
             AcquiredDate = reptileRequest.AcquiredDate,
             WeightGrams = reptileRequest.WeightGrams,

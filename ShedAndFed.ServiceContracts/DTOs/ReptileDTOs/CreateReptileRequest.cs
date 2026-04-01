@@ -3,12 +3,8 @@ using ShedAndFed.ServiceContracts.Enums;
 
 namespace ShedAndFed.ServiceContracts.DTOs.ReptileDTOs;
 
-public class UpdateReptileRequest
+public class CreateReptileRequest
 {
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "A valid ID is required.")]
-    public int ReptileId { get; set; }
-
     [Required] [MaxLength(100)] public string Name { get; set; } = string.Empty;
 
     [MaxLength(100)] public string Species { get; set; } = string.Empty;
