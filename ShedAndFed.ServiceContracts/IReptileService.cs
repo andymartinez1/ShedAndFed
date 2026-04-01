@@ -2,15 +2,6 @@ using ShedAndFed.ServiceContracts.DTOs.ReptileDTOs;
 
 namespace ShedAndFed.ServiceContracts;
 
-public interface IReptileService
+public interface IReptileService : ICrudService<AddReptileRequest, UpdateReptileRequest, ReptileResponse, int>
 {
-    Task<ReptileResponse> AddReptileAsync(AddReptileRequest request);
-
-    Task<ReptileResponse> GetReptileByIdAsync(int id);
-
-    Task<List<ReptileResponse>> GetAllReptilesAsync();
-
-    Task<ReptileResponse> UpdateReptileAsync(UpdateReptileRequest request);
-
-    Task<bool> DeleteReptileAsync(int id);
 }

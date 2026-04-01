@@ -18,7 +18,7 @@ public class ReptileService : IReptileService
         _logger = logger;
     }
 
-    public async Task<ReptileResponse> AddReptileAsync(AddReptileRequest request)
+    public async Task<ReptileResponse> CreateAsync(AddReptileRequest request)
     {
         var reptile = MapToReptile(request);
 
@@ -43,7 +43,7 @@ public class ReptileService : IReptileService
         return MapToReptileResponse(reptile);
     }
 
-    public async Task<ReptileResponse> GetReptileByIdAsync(int id)
+    public async Task<ReptileResponse?> GetByIdAsync(int id)
     {
         var reptile = await _context.Reptiles.AsNoTracking().SingleOrDefaultAsync(r => r.ReptileId == id);
 
@@ -52,14 +52,14 @@ public class ReptileService : IReptileService
         return MapToReptileResponse(reptile);
     }
 
-    public async Task<List<ReptileResponse>> GetAllReptilesAsync()
+    public async Task<List<ReptileResponse>> GetAllAsync()
     {
         var reptiles = await _context.Reptiles.AsNoTracking().ToListAsync();
 
         return reptiles.Select(MapToReptileResponse).ToList();
     }
 
-    public async Task<ReptileResponse> UpdateReptileAsync(UpdateReptileRequest request)
+    public async Task<ReptileResponse?> UpdateAsync(UpdateReptileRequest request)
     {
         var reptile = await _context.Reptiles.FindAsync(request.ReptileId);
 
@@ -75,7 +75,7 @@ public class ReptileService : IReptileService
         reptile.LengthCm = request.LengthCm;
         reptile.IsAlive = request.IsAlive;
         reptile.Notes = request.Notes;
-
+        
         try
         {
             await _context.SaveChangesAsync();
@@ -95,7 +95,7 @@ public class ReptileService : IReptileService
         return MapToReptileResponse(reptile);
     }
 
-    public async Task<bool> DeleteReptileAsync(int id)
+    public async Task<bool> DeleteAsync(int id)
     {
         var reptile = await _context.Reptiles.FindAsync(id);
 
