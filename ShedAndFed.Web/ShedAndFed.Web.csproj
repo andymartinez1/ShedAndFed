@@ -7,17 +7,18 @@
         <RootNamespace>ShedAndFed</RootNamespace>
     </PropertyGroup>
     <ItemGroup>
-        <ProjectReference Include="..\ShedAndFed.Services\ShedAndFed.Services.csproj" />
+        <ProjectReference Include="..\ShedAndFed.Services\ShedAndFed.Services.csproj"/>
     </ItemGroup>
     <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.App.Internal.Assets" Version="10.0.5"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.5">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="Components\Pages\FeedingLogs\" />
-      <Folder Include="Components\Pages\ShedLogs\" />
-      <Folder Include="Components\Pages\WasteLogs\" />
+        <Folder Include="Components\Pages\FeedingLogs\"/>
+        <Folder Include="Components\Pages\ShedLogs\"/>
+        <Folder Include="Components\Pages\WasteLogs\"/>
     </ItemGroup>
 </Project>

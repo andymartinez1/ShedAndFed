@@ -16,15 +16,13 @@ public class Reptile
 
     public DateTime AcquiredDate { get; set; }
 
-    public double? WeightGrams { get; set; }
-
-    public double? LengthCm { get; set; }
-
     public bool IsAlive { get; set; } = true;
 
     public string? Notes { get; set; } = string.Empty;
 
     public List<FeedingLog> Feedings { get; set; } = [];
+
+    public List<GrowthLog> Growth { get; set; } = [];
 
     public List<ShedLog> Sheds { get; set; } = [];
 

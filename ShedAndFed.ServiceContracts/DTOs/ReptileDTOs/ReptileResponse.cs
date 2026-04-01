@@ -1,3 +1,5 @@
+using ShedAndFed.ServiceContracts.DTOs.GrowthLogDTOs;
+
 namespace ShedAndFed.ServiceContracts.DTOs.ReptileDTOs;
 
 public class ReptileResponse
@@ -16,17 +18,9 @@ public class ReptileResponse
 
     public DateTime AcquiredDate { get; set; }
 
-    public double? WeightGrams { get; set; }
-
-    public double? LengthCm { get; set; }
-
     public bool IsAlive { get; set; } = true;
 
     public string? Notes { get; set; } = string.Empty;
 
-    public DateTime? LastFed { get; set; }
-
-    public DateTime? LastShed { get; set; }
-
-    public DateTime? LastPooped { get; set; }
+    public GrowthLogResponse? LatestGrowth { get; set; }
 }

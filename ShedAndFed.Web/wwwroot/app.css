@@ -18,6 +18,7 @@
     --feeding: #ff9800;
     --shed: #64b5f6;
     --waste: #a5d6a7;
+    --growth: #ce93d8;
     --radius: 14px;
     --shadow: 0 4px 24px #00000055;
 }
@@ -189,7 +190,7 @@ h1:focus {
 /* ── Feature Cards ── */
 .features {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 1.25rem;
     margin-top: 1rem;
 }
@@ -232,6 +233,11 @@ h1:focus {
 .feature-icon.waste {
     background: #a5d6a722;
     color: var(--waste);
+}
+
+.feature-icon.growth {
+    background: #ce93d822;
+    color: var(--growth);
 }
 
 .feature-card h3 {
@@ -279,9 +285,9 @@ h1:focus {
     margin-bottom: .25rem;
 }
 
-    .page-title i {
-        color: var(--accent);
-    }
+.page-title i {
+    color: var(--accent);
+}
 
 .page-subtitle {
     color: var(--text-muted);
@@ -341,39 +347,39 @@ h1:focus {
     font-size: .92rem;
 }
 
-    .reptile-table thead {
-        background: var(--surface-2);
-        border-bottom: 1px solid var(--border);
-    }
+.reptile-table thead {
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--border);
+}
 
-    .reptile-table th {
-        padding: .85rem 1.1rem;
-        text-align: left;
-        font-weight: 600;
-        font-size: .8rem;
-        text-transform: uppercase;
-        letter-spacing: .06em;
-        color: var(--text-muted);
-        white-space: nowrap;
-    }
+.reptile-table th {
+    padding: .85rem 1.1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: .8rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
 
-    .reptile-table td {
-        padding: .9rem 1.1rem;
-        border-bottom: 1px solid var(--border);
-        color: var(--text);
-    }
+.reptile-table td {
+    padding: .9rem 1.1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+}
 
-    .reptile-table tbody tr:last-child td {
-        border-bottom: none;
-    }
+.reptile-table tbody tr:last-child td {
+    border-bottom: none;
+}
 
-    .reptile-table tbody tr {
-        transition: background .15s;
-    }
+.reptile-table tbody tr {
+    transition: background .15s;
+}
 
-        .reptile-table tbody tr:hover {
-            background: var(--surface-2);
-        }
+.reptile-table tbody tr:hover {
+    background: var(--surface-2);
+}
 
 .reptile-name {
     font-weight: 600;
@@ -400,11 +406,11 @@ h1:focus {
     transition: all .2s;
 }
 
-    .btn-icon:hover {
-        color: var(--accent);
-        border-color: var(--accent-dim);
-        background: var(--accent-glow);
-    }
+.btn-icon:hover {
+    color: var(--accent);
+    border-color: var(--accent-dim);
+    background: var(--accent-glow);
+}
 
 /* ── Form ── */
 .form-card {
@@ -463,17 +469,17 @@ h1:focus {
     width: 100%;
 }
 
-    .form-input:focus,
-    .form-select:focus {
-        outline: none;
-        border-color: var(--accent-dim);
-        box-shadow: 0 0 0 3px var(--accent-glow);
-    }
+.form-input:focus,
+.form-select:focus {
+    outline: none;
+    border-color: var(--accent-dim);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
 
-    .form-input::placeholder {
-        color: var(--text-muted);
-        opacity: .6;
-    }
+.form-input::placeholder {
+    color: var(--text-muted);
+    opacity: .6;
+}
 
 .form-textarea {
     min-height: 100px;
@@ -491,12 +497,12 @@ h1:focus {
     user-select: none;
 }
 
-    .form-check input[type="checkbox"] {
-        accent-color: var(--accent);
-        width: 16px;
-        height: 16px;
-        cursor: pointer;
-    }
+.form-check input[type="checkbox"] {
+    accent-color: var(--accent);
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
 
 .form-actions {
     display: flex;

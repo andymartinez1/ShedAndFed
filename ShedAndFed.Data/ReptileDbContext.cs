@@ -14,6 +14,7 @@ public class ReptileDbContext : DbContext
     public DbSet<FeedingLog> FeedingLogs { get; set; }
     public DbSet<ShedLog> ShedLogs { get; set; }
     public DbSet<WasteLog> WasteLogs { get; set; }
+    public DbSet<GrowthLog> GrowthLogs { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -23,6 +24,7 @@ public class ReptileDbContext : DbContext
         modelBuilder.Entity<FeedingLog>().HasKey(f => f.LogId);
         modelBuilder.Entity<ShedLog>().HasKey(s => s.LogId);
         modelBuilder.Entity<WasteLog>().HasKey(w => w.LogId);
+        modelBuilder.Entity<GrowthLog>().HasKey(g => g.LogId);
 
         modelBuilder.Entity<Reptile>(entity =>
         {
@@ -44,6 +46,12 @@ public class ReptileDbContext : DbContext
                 .HasMany(r => r.Wastes)
                 .WithOne(w => w.Reptile)
                 .HasForeignKey(w => w.ReptileId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            entity
+                .HasMany(r => r.Growth)
+                .WithOne(g => g.Reptile)
+                .HasForeignKey(g => g.ReptileId)
                 .OnDelete(DeleteBehavior.Cascade);
         });
     }

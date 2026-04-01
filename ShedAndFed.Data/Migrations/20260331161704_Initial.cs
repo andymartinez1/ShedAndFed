@@ -23,8 +23,6 @@ namespace ShedAndFed.Data.Migrations
                     Sex = table.Column<string>(type: "TEXT", nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "TEXT", nullable: true),
                     AcquiredDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    WeightGrams = table.Column<double>(type: "REAL", nullable: true),
-                    LengthCm = table.Column<double>(type: "REAL", nullable: true),
                     IsAlive = table.Column<bool>(type: "INTEGER", nullable: false),
                     Notes = table.Column<string>(type: "TEXT", nullable: true)
                 },
@@ -51,6 +49,29 @@ namespace ShedAndFed.Data.Migrations
                     table.PrimaryKey("PK_FeedingLogs", x => x.LogId);
                     table.ForeignKey(
                         name: "FK_FeedingLogs_Reptiles_ReptileId",
+                        column: x => x.ReptileId,
+                        principalTable: "Reptiles",
+                        principalColumn: "ReptileId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GrowthLogs",
+                columns: table => new
+                {
+                    LogId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    WeightGrams = table.Column<double>(type: "REAL", nullable: true),
+                    LengthCm = table.Column<double>(type: "REAL", nullable: true),
+                    Date = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Notes = table.Column<string>(type: "TEXT", nullable: false),
+                    ReptileId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GrowthLogs", x => x.LogId);
+                    table.ForeignKey(
+                        name: "FK_GrowthLogs_Reptiles_ReptileId",
                         column: x => x.ReptileId,
                         principalTable: "Reptiles",
                         principalColumn: "ReptileId",
@@ -107,6 +128,11 @@ namespace ShedAndFed.Data.Migrations
                 column: "ReptileId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_GrowthLogs_ReptileId",
+                table: "GrowthLogs",
+                column: "ReptileId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ShedLogs_ReptileId",
                 table: "ShedLogs",
                 column: "ReptileId");
@@ -122,6 +148,9 @@ namespace ShedAndFed.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "FeedingLogs");
+
+            migrationBuilder.DropTable(
+                name: "GrowthLogs");
 
             migrationBuilder.DropTable(
                 name: "ShedLogs");

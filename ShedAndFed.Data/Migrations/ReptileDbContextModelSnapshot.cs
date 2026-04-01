@@ -51,6 +51,35 @@ namespace ShedAndFed.Data.Migrations
                     b.ToTable("FeedingLogs");
                 });
 
+            modelBuilder.Entity("ShedAndFed.Entities.GrowthLog", b =>
+                {
+                    b.Property<int>("LogId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<double?>("LengthCm")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ReptileId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double?>("WeightGrams")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("LogId");
+
+                    b.HasIndex("ReptileId");
+
+                    b.ToTable("GrowthLogs");
+                });
+
             modelBuilder.Entity("ShedAndFed.Entities.Reptile", b =>
                 {
                     b.Property<int>("ReptileId")
@@ -65,9 +94,6 @@ namespace ShedAndFed.Data.Migrations
 
                     b.Property<bool>("IsAlive")
                         .HasColumnType("INTEGER");
-
-                    b.Property<double?>("LengthCm")
-                        .HasColumnType("REAL");
 
                     b.Property<string>("Morph")
                         .HasColumnType("TEXT");
@@ -85,9 +111,6 @@ namespace ShedAndFed.Data.Migrations
                     b.Property<string>("Species")
                         .IsRequired()
                         .HasColumnType("TEXT");
-
-                    b.Property<double?>("WeightGrams")
-                        .HasColumnType("REAL");
 
                     b.HasKey("ReptileId");
 
@@ -158,6 +181,17 @@ namespace ShedAndFed.Data.Migrations
                     b.Navigation("Reptile");
                 });
 
+            modelBuilder.Entity("ShedAndFed.Entities.GrowthLog", b =>
+                {
+                    b.HasOne("ShedAndFed.Entities.Reptile", "Reptile")
+                        .WithMany("Growth")
+                        .HasForeignKey("ReptileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Reptile");
+                });
+
             modelBuilder.Entity("ShedAndFed.Entities.ShedLog", b =>
                 {
                     b.HasOne("ShedAndFed.Entities.Reptile", "Reptile")
@@ -183,6 +217,8 @@ namespace ShedAndFed.Data.Migrations
             modelBuilder.Entity("ShedAndFed.Entities.Reptile", b =>
                 {
                     b.Navigation("Feedings");
+
+                    b.Navigation("Growth");
 
                     b.Navigation("Sheds");
 

@@ -17,24 +17,25 @@
 
 <div class="form-card">
     <EditForm Model="Request" OnValidSubmit="HandleSubmit" FormName="CreateReptile">
-        <DataAnnotationsValidator />
+        <DataAnnotationsValidator/>
 
         <div class="form-section">
             <h4 class="form-section-title">Basic Information</h4>
             <div class="form-grid">
                 <div class="form-group">
                     <label class="form-label" for="name">Name <span class="required">*</span></label>
-                    <InputText id="name" class="form-input" @bind-Value="Request.Name" placeholder="e.g. Noodle" />
-                    <ValidationMessage For="() => Request.Name" />
+                    <InputText id="name" class="form-input" @bind-Value="Request.Name" placeholder="e.g. Noodle"/>
+                    <ValidationMessage For="() => Request.Name"/>
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="species">Species</label>
-                    <InputText id="species" class="form-input" @bind-Value="Request.Species" placeholder="e.g. Ball Python" />
-                    <ValidationMessage For="() => Request.Species" />
+                    <InputText id="species" class="form-input" @bind-Value="Request.Species"
+                               placeholder="e.g. Ball Python"/>
+                    <ValidationMessage For="() => Request.Species"/>
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="morph">Morph</label>
-                    <InputText id="morph" class="form-input" @bind-Value="Request.Morph" placeholder="e.g. Pastel" />
+                    <InputText id="morph" class="form-input" @bind-Value="Request.Morph" placeholder="e.g. Pastel"/>
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="sex">Sex</label>
@@ -53,21 +54,11 @@
             <div class="form-grid">
                 <div class="form-group">
                     <label class="form-label" for="acquired">Acquired Date <span class="required">*</span></label>
-                    <InputDate id="acquired" class="form-input" @bind-Value="Request.AcquiredDate" />
+                    <InputDate id="acquired" class="form-input" @bind-Value="Request.AcquiredDate"/>
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="dob">Date of Birth</label>
-                    <InputDate id="dob" class="form-input" @bind-Value="Request.DateOfBirth" />
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="weight">Weight (g)</label>
-                    <InputNumber id="weight" class="form-input" @bind-Value="Request.WeightGrams" placeholder="0.0" />
-                    <ValidationMessage For="() => Request.WeightGrams" />
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="length">Length (cm)</label>
-                    <InputNumber id="length" class="form-input" @bind-Value="Request.LengthCm" placeholder="0.0" />
-                    <ValidationMessage For="() => Request.LengthCm" />
+                    <InputDate id="dob" class="form-input" @bind-Value="Request.DateOfBirth"/>
                 </div>
             </div>
         </div>
@@ -77,8 +68,8 @@
             <div class="form-group">
                 <label class="form-label" for="notes">Notes</label>
                 <InputTextArea id="notes" class="form-input form-textarea" @bind-Value="Request.Notes"
-                               placeholder="Any additional notes about this reptile..." />
-                <ValidationMessage For="() => Request.Notes" />
+                               placeholder="Any additional notes about this reptile..."/>
+                <ValidationMessage For="() => Request.Notes"/>
             </div>
         </div>
 
@@ -110,4 +101,5 @@
         await ReptileService.CreateAsync(Request);
         NavigationManager.NavigateTo("/reptiles");
     }
+
 }

@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using ShedAndFed.Data;
 using ShedAndFed.Entities;
 using ShedAndFed.ServiceContracts;
+using ShedAndFed.ServiceContracts.DTOs.GrowthLogDTOs;
 using ShedAndFed.ServiceContracts.DTOs.ReptileDTOs;
 
 namespace ShedAndFed.Services;
@@ -45,7 +46,10 @@ public class ReptileService : IReptileService
 
     public async Task<ReptileResponse?> GetByIdAsync(int id)
     {
-        var reptile = await _context.Reptiles.AsNoTracking().SingleOrDefaultAsync(r => r.ReptileId == id);
+        var reptile = await _context.Reptiles
+            .AsNoTracking()
+            .Include(r => r.Growth)
+            .SingleOrDefaultAsync(r => r.ReptileId == id);
 
         if (reptile is null) return null;
 
@@ -54,7 +58,10 @@ public class ReptileService : IReptileService
 
     public async Task<List<ReptileResponse>> GetAllAsync()
     {
-        var reptiles = await _context.Reptiles.AsNoTracking().ToListAsync();
+        var reptiles = await _context.Reptiles
+            .AsNoTracking()
+            .Include(r => r.Growth)
+            .ToListAsync();
 
         return reptiles.Select(MapToReptileResponse).ToList();
     }
@@ -71,8 +78,6 @@ public class ReptileService : IReptileService
         reptile.Sex = request.Sex.ToString();
         reptile.DateOfBirth = request.DateOfBirth;
         reptile.AcquiredDate = request.AcquiredDate;
-        reptile.WeightGrams = request.WeightGrams;
-        reptile.LengthCm = request.LengthCm;
         reptile.IsAlive = request.IsAlive;
         reptile.Notes = request.Notes;
 
@@ -132,8 +137,6 @@ public class ReptileService : IReptileService
             Sex = reptileRequest.Sex.ToString(),
             DateOfBirth = reptileRequest.DateOfBirth,
             AcquiredDate = reptileRequest.AcquiredDate,
-            WeightGrams = reptileRequest.WeightGrams,
-            LengthCm = reptileRequest.LengthCm,
             IsAlive = reptileRequest.IsAlive,
             Notes = reptileRequest.Notes
         };
@@ -141,6 +144,10 @@ public class ReptileService : IReptileService
 
     private ReptileResponse MapToReptileResponse(Reptile reptile)
     {
+        var latestGrowth = reptile.Growth
+            .OrderByDescending(g => g.Date)
+            .FirstOrDefault();
+
         return new ReptileResponse
         {
             ReptileId = reptile.ReptileId,
@@ -150,10 +157,19 @@ public class ReptileService : IReptileService
             Sex = reptile.Sex,
             DateOfBirth = reptile.DateOfBirth,
             AcquiredDate = reptile.AcquiredDate,
-            WeightGrams = reptile.WeightGrams,
-            LengthCm = reptile.LengthCm,
             IsAlive = reptile.IsAlive,
-            Notes = reptile.Notes
+            Notes = reptile.Notes,
+            LatestGrowth = latestGrowth is null
+                ? null
+                : new GrowthLogResponse
+                {
+                    LogId = latestGrowth.LogId,
+                    Date = latestGrowth.Date,
+                    Notes = latestGrowth.Notes,
+                    ReptileId = latestGrowth.ReptileId,
+                    WeightGrams = latestGrowth.WeightGrams,
+                    LengthCm = latestGrowth.LengthCm
+                }
         };
     }
 }

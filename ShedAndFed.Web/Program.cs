@@ -18,6 +18,7 @@ builder.Services.AddScoped<IReptileService, ReptileService>();
 builder.Services.AddScoped<IFeedingLogService, FeedingLogService>();
 builder.Services.AddScoped<IShedLogService, ShedLogService>();
 builder.Services.AddScoped<IWasteLogService, WasteLogService>();
+builder.Services.AddScoped<IGrowthLogService, GrowthLogService>();
 
 var app = builder.Build();
 
