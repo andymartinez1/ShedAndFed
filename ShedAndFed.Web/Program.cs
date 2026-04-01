@@ -15,6 +15,9 @@ var connectionString =
 builder.Services.AddDbContext<ReptileDbContext>(options => options.UseSqlite(connectionString));
 
 builder.Services.AddScoped<IReptileService, ReptileService>();
+builder.Services.AddScoped<IFeedingLogService, FeedingLogService>();
+builder.Services.AddScoped<IShedLogService, ShedLogService>();
+builder.Services.AddScoped<IWasteLogService, WasteLogService>();
 
 var app = builder.Build();
 
