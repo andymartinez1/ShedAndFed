@@ -1,0 +1,60 @@
+@inject IReptileService ReptileService
+
+<Modal @ref="_modal" Title="Delete Reptile" IsVerticallyCentered="true">
+    <BodyTemplate>
+        @if (Reptile is not null)
+        {
+            <p>
+                Are you sure you want to delete <strong>@Reptile.Name</strong>
+                (@Reptile.Species)?
+            </p>
+            <p class="modal-danger-note">
+                <i class="bi bi-exclamation-triangle-fill"></i> This action cannot be undone.
+            </p>
+        }
+    </BodyTemplate>
+    <FooterTemplate>
+        <button class="btn btn-outline" @onclick="HideAsync" disabled="@_isDeleting">Cancel</button>
+        <button class="btn btn-danger-custom" @onclick="OnDeleteAsync" disabled="@_isDeleting">
+            @if (_isDeleting)
+            {
+                <i class="bi bi-hourglass-split"></i>
+                <span>Deleting...</span>
+            }
+            else
+            {
+                <i class="bi bi-trash3-fill"></i>
+                <span>Delete</span>
+            }
+        </button>
+    </FooterTemplate>
+</Modal>
+
+@code {
+    [Parameter][EditorRequired] public ReptileResponse? Reptile { get; set; }
+    [Parameter] public EventCallback OnDeleted { get; set; }
+
+    private Modal _modal = default!;
+    private bool _isDeleting;
+
+    public Task ShowAsync()
+    {
+        return _modal.ShowAsync();
+    }
+
+    public Task HideAsync()
+    {
+        return _modal.HideAsync();
+    }
+
+    private async Task OnDeleteAsync()
+    {
+        if (Reptile is null) return;
+        _isDeleting = true;
+        await ReptileService.DeleteAsync(Reptile.ReptileId);
+        _isDeleting = false;
+        await _modal.HideAsync();
+        await OnDeleted.InvokeAsync();
+    }
+
+}

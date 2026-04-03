@@ -72,6 +72,10 @@ else
                         <a href="/reptiles/@reptile.ReptileId/edit" class="btn-icon" title="Edit">
                             <i class="bi bi-pencil"></i>
                         </a>
+                        <button class="btn-icon btn-icon-danger" @onclick="() => ShowDeleteModal(reptile)"
+                                title="Delete">
+                            <i class="bi bi-trash3"></i>
+                        </button>
                     </td>
                 </tr>
             }
@@ -80,12 +84,40 @@ else
     </div>
 }
 
+<ReptileDeleteModalComponent @ref="_deleteModal" Reptile="_selectedReptile" OnDeleted="RefreshListAsync"/>
+
+<Toasts class="p-3" Messages="messages" AutoHide="true" Delay="6000" Placement="ToastsPlacement.TopRight"/>
+
+
 @code {
     List<ReptileResponse> Reptiles { get; set; }
+    private ReptileResponse? _selectedReptile;
+    private ReptileDeleteModalComponent _deleteModal = default!;
+    readonly List<ToastMessage> messages = new();
 
     protected override async Task OnInitializedAsync()
     {
         Reptiles = await ReptileService.GetAllAsync();
+    }
+
+    private async Task ShowDeleteModal(ReptileResponse reptile)
+    {
+        _selectedReptile = reptile;
+        await _deleteModal.ShowAsync();
+    }
+
+    private async Task RefreshListAsync()
+    {
+        var name = _selectedReptile?.Name ?? "Reptile";
+        Reptiles = await ReptileService.GetAllAsync();
+        messages.Add(new ToastMessage
+        {
+            Type = ToastType.Success,
+            Title = "Deleted",
+            HelpText = DateTime.Now.ToShortTimeString(),
+            Message = $"{name} has been permanently deleted."
+        });
+        StateHasChanged();
     }
 
     private int CalculateAge(TimeSpan span)
