@@ -2,5 +2,5 @@
 
 public class ShedLog : ReptileLogBase
 {
-    public bool CompleteShed { get; set; }
+    public bool FullShed { get; set; }
 }

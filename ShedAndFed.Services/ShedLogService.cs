@@ -45,17 +45,20 @@ public class ShedLogService : IShedLogService
 
     public async Task<ShedLogResponse?> GetByIdAsync(int id)
     {
-        var shedLog = await _context.ShedLogs.AsNoTracking().SingleOrDefaultAsync(s => s.LogId == id);
+        var shedLog = await _context
+            .ShedLogs.AsNoTracking()
+            .SingleOrDefaultAsync(s => s.LogId == id);
 
-        if (shedLog is null) return null;
+        if (shedLog is null)
+            return null;
 
         return MapToShedLogResponse(shedLog);
     }
 
     public async Task<List<ShedLogResponse>> GetAllByReptileIdAsync(int reptileId)
     {
-        var shedLogs = await _context.ShedLogs
-            .AsNoTracking()
+        var shedLogs = await _context
+            .ShedLogs.AsNoTracking()
             .Where(s => s.ReptileId == reptileId)
             .ToListAsync();
 
@@ -66,12 +69,13 @@ public class ShedLogService : IShedLogService
     {
         var shedLog = await _context.ShedLogs.FindAsync(request.LogId);
 
-        if (shedLog is null) return null;
+        if (shedLog is null)
+            return null;
 
         shedLog.Date = request.Date;
         shedLog.Notes = request.Notes;
         shedLog.ReptileId = request.ReptileId;
-        shedLog.CompleteShed = request.CompleteShed;
+        shedLog.FullShed = request.CompleteShed;
 
         try
         {
@@ -96,7 +100,8 @@ public class ShedLogService : IShedLogService
     {
         var shedLog = await _context.ShedLogs.FindAsync(id);
 
-        if (shedLog is null) return false;
+        if (shedLog is null)
+            return false;
 
         _context.ShedLogs.Remove(shedLog);
 
@@ -126,7 +131,7 @@ public class ShedLogService : IShedLogService
             Date = request.Date,
             Notes = request.Notes,
             ReptileId = request.ReptileId,
-            CompleteShed = request.CompleteShed
+            FullShed = request.CompleteShed,
         };
     }
 
@@ -138,7 +143,7 @@ public class ShedLogService : IShedLogService
             Date = shedLog.Date,
             Notes = shedLog.Notes,
             ReptileId = shedLog.ReptileId,
-            CompleteShed = shedLog.CompleteShed
+            CompleteShed = shedLog.FullShed,
         };
     }
 }

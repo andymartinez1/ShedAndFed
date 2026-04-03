@@ -11,7 +11,7 @@ using ShedAndFed.Data;
 namespace ShedAndFed.Data.Migrations
 {
     [DbContext(typeof(ReptileDbContext))]
-    [Migration("20260331161704_Initial")]
+    [Migration("20260403002921_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -34,14 +34,12 @@ namespace ShedAndFed.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Notes")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("ReptileId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Size")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("WasEaten")
@@ -67,7 +65,6 @@ namespace ShedAndFed.Data.Migrations
                         .HasColumnType("REAL");
 
                     b.Property<string>("Notes")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("ReptileId")
@@ -126,14 +123,13 @@ namespace ShedAndFed.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("CompleteShed")
-                        .HasColumnType("INTEGER");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("FullShed")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Notes")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("ReptileId")
@@ -156,7 +152,6 @@ namespace ShedAndFed.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Notes")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("ReptileId")

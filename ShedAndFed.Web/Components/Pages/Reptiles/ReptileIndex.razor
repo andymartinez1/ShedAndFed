@@ -47,6 +47,7 @@ else
                 <th>Morph</th>
                 <th>Sex</th>
                 <th>Date of Birth</th>
+                <th>Age</th>
                 <th>Weight (g)</th>
                 <th>Length (cm)</th>
                 <th></th>
@@ -61,6 +62,7 @@ else
                     <td>@(reptile.Morph is { Length: > 0 } ? reptile.Morph : "—")</td>
                     <td>@(reptile.Sex ?? "—")</td>
                     <td>@(reptile.DateOfBirth?.ToString("MMM d, yyyy") ?? "—")</td>
+                    <td>@(reptile.Age.HasValue ? $"{CalculateAge(reptile.Age.Value)}" : "—")</td>
                     <td>@(reptile.LatestGrowth?.WeightGrams?.ToString("0.#") ?? "—")</td>
                     <td>@(reptile.LatestGrowth?.LengthCm?.ToString("0.#") ?? "—")</td>
                     <td class="table-actions">
@@ -84,6 +86,11 @@ else
     protected override async Task OnInitializedAsync()
     {
         Reptiles = await ReptileService.GetAllAsync();
+    }
+
+    private int CalculateAge(TimeSpan span)
+    {
+        return (int)(span.TotalDays / 365.2425);
     }
 
 }

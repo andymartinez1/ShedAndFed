@@ -38,10 +38,10 @@ namespace ShedAndFed.Data.Migrations
                     LogId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     FoodType = table.Column<string>(type: "TEXT", nullable: false),
-                    Size = table.Column<string>(type: "TEXT", nullable: false),
+                    Size = table.Column<string>(type: "TEXT", nullable: true),
                     WasEaten = table.Column<bool>(type: "INTEGER", nullable: false),
                     Date = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Notes = table.Column<string>(type: "TEXT", nullable: false),
+                    Notes = table.Column<string>(type: "TEXT", nullable: true),
                     ReptileId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -64,7 +64,7 @@ namespace ShedAndFed.Data.Migrations
                     WeightGrams = table.Column<double>(type: "REAL", nullable: true),
                     LengthCm = table.Column<double>(type: "REAL", nullable: true),
                     Date = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Notes = table.Column<string>(type: "TEXT", nullable: false),
+                    Notes = table.Column<string>(type: "TEXT", nullable: true),
                     ReptileId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -84,9 +84,9 @@ namespace ShedAndFed.Data.Migrations
                 {
                     LogId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    CompleteShed = table.Column<bool>(type: "INTEGER", nullable: false),
+                    FullShed = table.Column<bool>(type: "INTEGER", nullable: false),
                     Date = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Notes = table.Column<string>(type: "TEXT", nullable: false),
+                    Notes = table.Column<string>(type: "TEXT", nullable: true),
                     ReptileId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -108,7 +108,7 @@ namespace ShedAndFed.Data.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Type = table.Column<string>(type: "TEXT", nullable: false),
                     Date = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Notes = table.Column<string>(type: "TEXT", nullable: false),
+                    Notes = table.Column<string>(type: "TEXT", nullable: true),
                     ReptileId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>

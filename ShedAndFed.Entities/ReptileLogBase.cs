@@ -6,7 +6,7 @@ public abstract class ReptileLogBase
 
     public DateTime Date { get; set; }
 
-    public string Notes { get; set; } = string.Empty;
+    public string? Notes { get; set; } = string.Empty;
 
     public int ReptileId { get; set; }
 

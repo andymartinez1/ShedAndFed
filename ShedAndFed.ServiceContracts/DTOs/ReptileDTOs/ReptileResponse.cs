@@ -23,4 +23,6 @@ public class ReptileResponse
     public string? Notes { get; set; } = string.Empty;
 
     public GrowthLogResponse? LatestGrowth { get; set; }
+
+    public TimeSpan? Age => DateTime.Now - DateOfBirth;
 }

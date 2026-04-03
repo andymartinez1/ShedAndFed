@@ -30,7 +30,10 @@ using (var scope = app.Services.CreateScope())
     try
     {
         db.Database.Migrate();
-        app.Logger.LogInformation("Database migrated successfully.");
+        var seeder = new SeedDatabase();
+        await seeder.SeedDatabaseAsync(db);
+
+        app.Logger.LogInformation("Database migrated and seeded successfully.");
     }
     catch (Exception e)
     {
