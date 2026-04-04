@@ -37,7 +37,7 @@ Implemented:
 
 In progress / next:
 
-- Dedicated routed pages for reptile/log management (`/reptiles`, `/feedings`, `/sheds`, `/wastes`)
+- Dedicated routed pages for reptile/log management (`/reptiles`, `/growth`, `/feedings`, `/sheds`, `/wastes`)
 - Full UI workflows for creating and viewing logs
 - Validation, filtering, and dashboard summaries
 - Automated tests
@@ -84,6 +84,7 @@ ShedAndFed/
 - One Reptile -> many FeedingLog
 - One Reptile -> many ShedLog
 - One Reptile -> many WasteLog
+- One Reptile -> many GrowthLog
 - Cascade delete is configured from reptile to associated logs
 
 ## Getting Started
