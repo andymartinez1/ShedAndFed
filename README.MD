@@ -92,7 +92,7 @@ ShedAndFed/
 ### Prerequisites
 
 - NET SDK compatible with target framework `net10.0`
-- Git (or)
+- Git
 - Bash shell on Windows (for commands below)
 
 1. **Clone the repository**
