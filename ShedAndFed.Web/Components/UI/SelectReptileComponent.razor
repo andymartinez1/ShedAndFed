@@ -1,0 +1,82 @@
+@inject IReptileService ReptileService
+@inject NavigationManager NavigationManager
+
+<Modal @ref="_modal" Title="Select a Reptile" IsVerticallyCentered="true">
+    <BodyTemplate>
+        <p class="select-modal-subtitle">
+            <span class="feature-icon @_iconClass select-modal-icon">
+                <i class="bi @_icon"></i>
+            </span>
+            Choose a reptile to view <strong>@_logTitle</strong>
+        </p>
+
+        @if (_reptiles is null)
+        {
+            <div class="select-modal-loading">
+                <i class="bi bi-hourglass-split"></i> Loading reptiles...
+            </div>
+        }
+        else if (!_reptiles.Any())
+        {
+            <div class="empty-state" style="border: none; padding: 1.5rem 0;">
+                <div class="empty-state-icon"><i class="bi bi-bug"></i></div>
+                <h3>No reptiles yet</h3>
+                <p>Add a reptile first before viewing logs.</p>
+                <a href="/reptiles/create" class="btn btn-primary" style="margin-top: .25rem;">
+                    <i class="bi bi-plus-circle"></i> Add Reptile
+                </a>
+            </div>
+        }
+        else
+        {
+            <div class="select-reptile-list">
+                @foreach (var reptile in _reptiles)
+                {
+                    <button class="select-reptile-item" @onclick="() => SelectReptileAsync(reptile)">
+                        <div class="select-reptile-info">
+                            <span class="select-reptile-name">@reptile.Name</span>
+                            <span class="select-reptile-meta">
+                                @(reptile.Species is { Length: > 0 } ? reptile.Species : "Unknown species")
+                                @if (reptile.Morph is { Length: > 0 })
+                                {
+                                    <span> · @reptile.Morph</span>
+                                }
+                            </span>
+                        </div>
+                        <i class="bi bi-chevron-right select-reptile-arrow"></i>
+                    </button>
+                }
+            </div>
+        }
+    </BodyTemplate>
+    <FooterTemplate>
+        <button class="btn btn-outline" @onclick="() => _modal.HideAsync()">Cancel</button>
+    </FooterTemplate>
+</Modal>
+
+@code {
+    private string _logRoute = "";
+    private string _logTitle = "";
+    private string _icon = "";
+    private string _iconClass = "";
+
+    private List<ReptileResponse>? _reptiles;
+    private Modal _modal = default!;
+
+    public async Task ShowAsync(string logRoute, string logTitle, string icon, string iconClass)
+    {
+        _logRoute = logRoute;
+        _logTitle = logTitle;
+        _icon = icon;
+        _iconClass = iconClass;
+        _reptiles = await ReptileService.GetAllAsync();
+        await _modal.ShowAsync();
+    }
+
+    private async Task SelectReptileAsync(ReptileResponse reptile)
+    {
+        await _modal.HideAsync();
+        NavigationManager.NavigateTo($"/{_logRoute}?reptileId={reptile.ReptileId}");
+    }
+
+}

@@ -29,7 +29,10 @@
         </div>
         <h3>Growth Tracking</h3>
         <p>Record weight and length over time to monitor growth trends and spot health changes early.</p>
-        <a href="/growth" class="feature-link">Go to growth logs <i class="bi bi-arrow-right"></i></a>
+        <button class="feature-link"
+                @onclick='() => _selectModal.ShowAsync("growth-logs", "Growth Logs", "bi-graph-up-arrow", "growth")'>
+            Go to growth logs <i class="bi bi-arrow-right"></i>
+        </button>
     </div>
     <div class="feature-card">
         <div class="feature-icon feeding">
@@ -37,7 +40,10 @@
         </div>
         <h3>Feeding Logs</h3>
         <p>Record food type, size, and whether it was eaten. Track feeding success over time.</p>
-        <a href="/feedings" class="feature-link">Go to feedings <i class="bi bi-arrow-right"></i></a>
+        <button class="feature-link"
+                @onclick='() => _selectModal.ShowAsync("feeding-logs", "Feeding Logs", "bi-basket2-fill", "feeding")'>
+            Go to feedings <i class="bi bi-arrow-right"></i>
+        </button>
     </div>
     <div class="feature-card">
         <div class="feature-icon shed">
@@ -45,7 +51,10 @@
         </div>
         <h3>Shed Tracking</h3>
         <p>Log every shed event and note whether it was a complete or incomplete shed.</p>
-        <a href="/sheds" class="feature-link">Go to sheds <i class="bi bi-arrow-right"></i></a>
+        <button class="feature-link"
+                @onclick='() => _selectModal.ShowAsync("shed-logs", "Shed Logs", "bi-layers-fill", "shed")'>
+            Go to sheds <i class="bi bi-arrow-right"></i>
+        </button>
     </div>
     <div class="feature-card">
         <div class="feature-icon waste">
@@ -53,6 +62,15 @@
         </div>
         <h3>Waste Logs</h3>
         <p>Keep an eye on waste patterns — an easy health indicator for your animals.</p>
-        <a href="/wastes" class="feature-link">Go to waste logs <i class="bi bi-arrow-right"></i></a>
+        <button class="feature-link"
+                @onclick='() => _selectModal.ShowAsync("waste-logs", "Waste Logs", "bi-droplet-fill", "waste")'>
+            Go to waste logs <i class="bi bi-arrow-right"></i>
+        </button>
     </div>
 </section>
+
+<SelectReptileComponent @ref="_selectModal"/>
+
+@code {
+    private SelectReptileComponent _selectModal = default!;
+}

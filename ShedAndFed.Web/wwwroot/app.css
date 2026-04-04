@@ -644,6 +644,96 @@ h1:focus {
     color: var(--text-muted) !important;
 }
 
+/* ── Select Reptile Modal ── */
+.select-modal-subtitle {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    color: var(--text-muted);
+    font-size: .92rem;
+    margin-bottom: 1rem;
+}
+
+.select-modal-icon {
+    width: 28px;
+    height: 28px;
+    font-size: .9rem;
+    border-radius: 8px;
+    flex-shrink: 0;
+    margin-bottom: 0 !important;
+}
+
+.select-modal-loading {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    color: var(--text-muted);
+    font-size: .92rem;
+    padding: .75rem 0;
+}
+
+.select-reptile-list {
+    display: flex;
+    flex-direction: column;
+    gap: .45rem;
+}
+
+.select-reptile-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: .85rem 1rem;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    text-align: left;
+    transition: border-color .2s, background .2s;
+}
+
+.select-reptile-item:hover {
+    border-color: var(--accent-dim);
+    background: var(--accent-glow);
+}
+
+.select-reptile-info {
+    display: flex;
+    flex-direction: column;
+    gap: .15rem;
+}
+
+.select-reptile-name {
+    font-weight: 600;
+    color: var(--accent);
+    font-size: .95rem;
+}
+
+.select-reptile-meta {
+    font-size: .82rem;
+    color: var(--text-muted);
+}
+
+.select-reptile-arrow {
+    color: var(--text-muted);
+    font-size: .85rem;
+    transition: color .2s, transform .2s;
+}
+
+.select-reptile-item:hover .select-reptile-arrow {
+    color: var(--accent);
+    transform: translateX(3px);
+}
+
+/* Allow feature-link to be used on a <button> */
+button.feature-link {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    cursor: pointer;
+}
+
 /* ── Blazor Utilities ── */
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
