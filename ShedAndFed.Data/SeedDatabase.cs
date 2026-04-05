@@ -17,7 +17,7 @@ public class SeedDatabase
                     Species = "Bearded Dragon",
                     Sex = "Male",
                     DateOfBirth = new DateTime(2023, 7, 5),
-                    AcquiredDate = new DateTime(2024, 1, 15),
+                    AcquiredDate = new DateTime(2024, 1, 15)
                 },
                 new Reptile
                 {
@@ -26,7 +26,7 @@ public class SeedDatabase
                     Morph = "Spider",
                     Sex = "Female",
                     DateOfBirth = new DateTime(2022, 9, 25),
-                    AcquiredDate = new DateTime(2024, 3, 20),
+                    AcquiredDate = new DateTime(2024, 3, 20)
                 },
                 new Reptile
                 {
@@ -34,13 +34,17 @@ public class SeedDatabase
                     Species = "Leopard Gecko",
                     Sex = "Male",
                     DateOfBirth = new DateTime(2024, 3, 1),
-                    AcquiredDate = new DateTime(2025, 6, 10),
-                },
+                    AcquiredDate = new DateTime(2025, 6, 10)
+                }
             };
 
             context.Reptiles.AddRange(reptiles);
             await context.SaveChangesAsync();
         }
+
+        var spike = context.Reptiles.First(r => r.Name == "Spike");
+        var luna = context.Reptiles.First(r => r.Name == "Luna");
+        var rex = context.Reptiles.First(r => r.Name == "Rex");
 
         // Seed Feeding Logs
         if (!context.FeedingLogs.Any())
@@ -49,32 +53,32 @@ public class SeedDatabase
             {
                 new FeedingLog
                 {
-                    ReptileId = 1,
+                    ReptileId = spike.ReptileId,
                     Date = DateTime.Now.AddDays(-2),
                     FoodType = "Crickets",
-                    WasEaten = true,
+                    WasEaten = true
                 },
                 new FeedingLog
                 {
-                    ReptileId = 1,
+                    ReptileId = spike.ReptileId,
                     Date = DateTime.Now.AddDays(-5),
                     FoodType = "Mealworms",
-                    WasEaten = false,
+                    WasEaten = false
                 },
                 new FeedingLog
                 {
-                    ReptileId = 2,
+                    ReptileId = luna.ReptileId,
                     Date = DateTime.Now.AddDays(-7),
                     FoodType = "Frozen Mouse",
-                    WasEaten = true,
+                    WasEaten = true
                 },
                 new FeedingLog
                 {
-                    ReptileId = 3,
+                    ReptileId = rex.ReptileId,
                     Date = DateTime.Now.AddDays(-1),
                     FoodType = "Crickets",
-                    WasEaten = true,
-                },
+                    WasEaten = true
+                }
             };
 
             context.FeedingLogs.AddRange(logs);
@@ -88,22 +92,22 @@ public class SeedDatabase
             {
                 new ShedLog
                 {
-                    ReptileId = 1,
+                    ReptileId = spike.ReptileId,
                     Date = DateTime.Now.AddDays(-10),
-                    FullShed = true,
+                    FullShed = true
                 },
                 new ShedLog
                 {
-                    ReptileId = 2,
+                    ReptileId = luna.ReptileId,
                     Date = DateTime.Now.AddDays(-14),
-                    FullShed = true,
+                    FullShed = true
                 },
                 new ShedLog
                 {
-                    ReptileId = 3,
+                    ReptileId = rex.ReptileId,
                     Date = DateTime.Now.AddDays(-8),
-                    FullShed = false,
-                },
+                    FullShed = false
+                }
             };
 
             context.ShedLogs.AddRange(shedLogs);
@@ -117,22 +121,22 @@ public class SeedDatabase
             {
                 new WasteLog
                 {
-                    ReptileId = 1,
+                    ReptileId = spike.ReptileId,
                     Date = DateTime.Now.AddDays(-3),
-                    Type = "Both",
+                    Type = "Both"
                 },
                 new WasteLog
                 {
-                    ReptileId = 2,
+                    ReptileId = luna.ReptileId,
                     Date = DateTime.Now.AddDays(-6),
-                    Type = "Urate",
+                    Type = "Urate"
                 },
                 new WasteLog
                 {
-                    ReptileId = 3,
+                    ReptileId = rex.ReptileId,
                     Date = DateTime.Now.AddDays(-2),
-                    Type = "Feces",
-                },
+                    Type = "Feces"
+                }
             };
 
             context.WasteLogs.AddRange(wasteLogs);
@@ -146,25 +150,25 @@ public class SeedDatabase
             {
                 new GrowthLog
                 {
-                    ReptileId = 1,
+                    ReptileId = spike.ReptileId,
                     Date = DateTime.Now.AddDays(-15),
                     WeightGrams = 150.5,
-                    LengthCm = 25.0,
+                    LengthCm = 25.0
                 },
                 new GrowthLog
                 {
-                    ReptileId = 2,
+                    ReptileId = luna.ReptileId,
                     Date = DateTime.Now.AddDays(-20),
                     WeightGrams = 800.0,
-                    LengthCm = 90.0,
+                    LengthCm = 90.0
                 },
                 new GrowthLog
                 {
-                    ReptileId = 3,
+                    ReptileId = rex.ReptileId,
                     Date = DateTime.Now.AddDays(-10),
                     WeightGrams = 45.0,
-                    LengthCm = 18.5,
-                },
+                    LengthCm = 18.5
+                }
             };
 
             context.GrowthLogs.AddRange(growthLogs);

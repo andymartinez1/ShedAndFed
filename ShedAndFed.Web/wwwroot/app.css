@@ -538,7 +538,7 @@ h1:focus {
     border-top: 1px solid var(--border);
 }
 
-/* ── Modal ── */
+/* ── Delete Modal ── */
 .modal-content {
     background: var(--surface) !important;
     border: 1px solid var(--border) !important;
@@ -574,6 +574,54 @@ h1:focus {
     font-size: .88rem;
     margin-top: .75rem;
     margin-bottom: 0;
+}
+
+/* ── Details Modal ── */
+.details-modal-body .form-section:last-child {
+    border-bottom: none;
+}
+
+.detail-value {
+    font-size: .95rem;
+    font-weight: 500;
+    color: var(--text);
+    padding: .15rem 0;
+}
+
+.detail-value.accent {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+
+.detail-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .25rem .75rem;
+    border-radius: 999px;
+    font-size: .82rem;
+    font-weight: 600;
+    width: fit-content;
+}
+
+.detail-badge.alive {
+    background: var(--accent-glow);
+    color: var(--accent);
+    border: 1px solid var(--accent-dim);
+}
+
+.detail-badge.deceased {
+    background: #ef535022;
+    color: #ef9a9a;
+    border: 1px solid #c6282855;
+}
+
+.detail-notes {
+    color: var(--text-muted);
+    font-size: .93rem;
+    line-height: 1.7;
+    white-space: pre-wrap;
 }
 
 /* ── Toast Notifications ── */

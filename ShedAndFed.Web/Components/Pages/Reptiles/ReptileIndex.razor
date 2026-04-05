@@ -66,9 +66,9 @@ else
                     <td>@(reptile.LatestGrowth?.WeightGrams?.ToString("0.#") ?? "—")</td>
                     <td>@(reptile.LatestGrowth?.LengthCm?.ToString("0.#") ?? "—")</td>
                     <td class="table-actions">
-                        <a href="/reptiles/@reptile.ReptileId" class="btn-icon" title="View">
+                        <button class="btn-icon" @onclick="() => ShowDetailsModal(reptile)" title="View">
                             <i class="bi bi-eye"></i>
-                        </a>
+                        </button>
                         <a href="/reptiles/@reptile.ReptileId/edit" class="btn-icon" title="Edit">
                             <i class="bi bi-pencil"></i>
                         </a>
@@ -85,6 +85,7 @@ else
 }
 
 <ReptileDeleteModalComponent @ref="_deleteModal" Reptile="_selectedReptile" OnDeleted="RefreshListAsync"/>
+<ReptileDetailsModalComponent @ref="_detailsModal" Reptile="_selectedReptile"/>
 
 <Toasts class="p-3" Messages="messages" AutoHide="true" Delay="6000" Placement="ToastsPlacement.TopRight"/>
 
@@ -93,11 +94,18 @@ else
     List<ReptileResponse> Reptiles { get; set; }
     private ReptileResponse? _selectedReptile;
     private ReptileDeleteModalComponent _deleteModal = default!;
+    private ReptileDetailsModalComponent _detailsModal = default!;
     readonly List<ToastMessage> messages = new();
 
     protected override async Task OnInitializedAsync()
     {
         Reptiles = await ReptileService.GetAllAsync();
+    }
+
+    private async Task ShowDetailsModal(ReptileResponse reptile)
+    {
+        _selectedReptile = reptile;
+        await _detailsModal.ShowAsync();
     }
 
     private async Task ShowDeleteModal(ReptileResponse reptile)

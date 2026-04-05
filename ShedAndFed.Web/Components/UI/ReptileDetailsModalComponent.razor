@@ -1,5 +1,115 @@
-<h3>ReptileDetailsModalComponent</h3>
+@inject NavigationManager NavigationManager
+
+<Modal @ref="_modal" Title="Reptile Details" IsVerticallyCentered="true" Size="ModalSize.Large">
+    <BodyTemplate>
+        @if (Reptile is not null)
+        {
+            <div class="details-modal-body">
+
+                <div class="form-section">
+                    <h4 class="form-section-title">Basic Information</h4>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <span class="form-label">Name</span>
+                            <span class="detail-value accent">@Reptile.Name</span>
+                        </div>
+                        <div class="form-group">
+                            <span class="form-label">Species</span>
+                            <span
+                                class="detail-value">@(Reptile.Species is { Length: > 0 } ? Reptile.Species : "—")</span>
+                        </div>
+                        <div class="form-group">
+                            <span class="form-label">Morph</span>
+                            <span class="detail-value">@(Reptile.Morph is { Length: > 0 } ? Reptile.Morph : "—")</span>
+                        </div>
+                        <div class="form-group">
+                            <span class="form-label">Sex</span>
+                            <span class="detail-value">@(Reptile.Sex ?? "—")</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h4 class="form-section-title">Dates & Age</h4>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <span class="form-label">Acquired Date</span>
+                            <span class="detail-value">@Reptile.AcquiredDate.ToString("MMM d, yyyy")</span>
+                        </div>
+                        <div class="form-group">
+                            <span class="form-label">Date of Birth</span>
+                            <span class="detail-value">@(Reptile.DateOfBirth?.ToString("MMM d, yyyy") ?? "—")</span>
+                        </div>
+                        <div class="form-group">
+                            <span class="form-label">Age</span>
+                            <span class="detail-value">
+                                @(Reptile.Age.HasValue ? $"{(int)(Reptile.Age.Value.TotalDays / 365.2425)} years" : "—")
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                @if (Reptile.LatestGrowth is not null)
+                {
+                    <div class="form-section">
+                        <h4 class="form-section-title">Latest Measurements</h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <span class="form-label">Weight</span>
+                                <span class="detail-value">
+                                    @(Reptile.LatestGrowth.WeightGrams.HasValue
+                                        ? $"{Reptile.LatestGrowth.WeightGrams.Value:0.#} g"
+                                        : "—")
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <span class="form-label">Length</span>
+                                <span class="detail-value">
+                                    @(Reptile.LatestGrowth.LengthCm.HasValue
+                                        ? $"{Reptile.LatestGrowth.LengthCm.Value:0.#} cm"
+                                        : "—")
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <span class="form-label">Recorded On</span>
+                                <span class="detail-value">@Reptile.LatestGrowth.Date.ToString("MMM d, yyyy")</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                @if (!string.IsNullOrWhiteSpace(Reptile.Notes))
+                {
+                    <div class="form-section" style="border-bottom: none;">
+                        <h4 class="form-section-title">Notes</h4>
+                        <p class="detail-notes">@Reptile.Notes</p>
+                    </div>
+                }
+
+            </div>
+        }
+    </BodyTemplate>
+    <FooterTemplate>
+        <button class="btn btn-outline" @onclick="HideAsync">Close</button>
+        <a href="/reptiles/@Reptile?.ReptileId/edit" class="btn btn-primary" @onclick="HideAsync">
+            <i class="bi bi-pencil-square"></i> Edit
+        </a>
+    </FooterTemplate>
+</Modal>
 
 @code {
+    [Parameter] [EditorRequired] public ReptileResponse? Reptile { get; set; }
+
+    private Modal _modal = default!;
+
+    public Task ShowAsync()
+    {
+        return _modal.ShowAsync();
+    }
+
+    private Task HideAsync()
+    {
+        return _modal.HideAsync();
+    }
 
 }

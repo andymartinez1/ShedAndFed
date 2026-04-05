@@ -1,0 +1,149 @@
+@page "/reptiles/{Id:int}/edit"
+@inject IReptileService ReptileService
+@inject NavigationManager NavigationManager
+@rendermode InteractiveServer
+
+<PageTitle>Edit Reptile</PageTitle>
+
+@if (Request is null)
+{
+    <div class="empty-state">
+        <div class="empty-state-icon">
+            <i class="bi bi-hourglass-split"></i>
+        </div>
+        <h3>Loading...</h3>
+    </div>
+}
+else
+{
+    <div class="page-header">
+        <div>
+            <h2 class="page-title"><i class="bi bi-pencil-square"></i> Edit Reptile</h2>
+            <p class="page-subtitle">Update details for @Request.Name</p>
+        </div>
+        <a href="/reptiles" class="btn btn-outline">
+            <i class="bi bi-arrow-left"></i> Back to Reptiles
+        </a>
+    </div>
+
+    <div class="form-card">
+        <EditForm Model="Request" OnValidSubmit="HandleSubmit" FormName="EditReptile">
+            <DataAnnotationsValidator/>
+
+            <div class="form-section">
+                <h4 class="form-section-title">Basic Information</h4>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label" for="name">Name <span class="required">*</span></label>
+                        <InputText id="name" class="form-input" @bind-Value="Request.Name" placeholder="e.g. Noodle"/>
+                        <ValidationMessage For="() => Request.Name"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="species">Species</label>
+                        <InputText id="species" class="form-input" @bind-Value="Request.Species"
+                                   placeholder="e.g. Ball Python"/>
+                        <ValidationMessage For="() => Request.Species"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="morph">Morph</label>
+                        <InputText id="morph" class="form-input" @bind-Value="Request.Morph" placeholder="e.g. Pastel"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="sex">Sex</label>
+                        <InputSelect id="sex" class="form-select" @bind-Value="Request.Sex">
+                            @foreach (var sex in Enum.GetValues<Sex>())
+                            {
+                                <option value="@sex">@sex</option>
+                            }
+                        </InputSelect>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h4 class="form-section-title">Measurements & Dates</h4>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label" for="acquired">Acquired Date <span class="required">*</span></label>
+                        <InputDate id="acquired" class="form-input" @bind-Value="Request.AcquiredDate"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="dob">Date of Birth</label>
+                        <InputDate id="dob" class="form-input" @bind-Value="Request.DateOfBirth"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h4 class="form-section-title">Additional</h4>
+                <div class="form-group">
+                    <label class="form-label" for="notes">Notes</label>
+                    <InputTextArea id="notes" class="form-input form-textarea" @bind-Value="Request.Notes"
+                                   placeholder="Any additional notes about this reptile..."/>
+                    <ValidationMessage For="() => Request.Notes"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="isAlive">Status</label>
+                    <InputSelect id="isAlive" class="form-select" @bind-Value="Request.IsAlive">
+                        <option value="true">Alive</option>
+                        <option value="false">Deceased</option>
+                    </InputSelect>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <a href="/reptiles" class="btn btn-outline">Cancel</a>
+                <button type="submit" class="btn btn-primary" disabled="@IsSubmitting">
+                    @if (IsSubmitting)
+                    {
+                        <i class="bi bi-hourglass-split"></i>
+                        <span>Saving...</span>
+                    }
+                    else
+                    {
+                        <i class="bi bi-check-circle"></i>
+                        <span>Save Changes</span>
+                    }
+                </button>
+            </div>
+        </EditForm>
+    </div>
+}
+
+@code {
+    [Parameter] public int Id { get; set; }
+
+    UpdateReptileRequest? Request { get; set; }
+    bool IsSubmitting { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var reptile = await ReptileService.GetByIdAsync(Id);
+        if (reptile is null)
+        {
+            NavigationManager.NavigateTo("/reptiles");
+            return;
+        }
+
+        Request = new UpdateReptileRequest
+        {
+            ReptileId = reptile.ReptileId,
+            Name = reptile.Name,
+            Species = reptile.Species,
+            Morph = reptile.Morph,
+            Sex = Enum.TryParse<Sex>(reptile.Sex, out var sex) ? sex : Sex.Unknown,
+            DateOfBirth = reptile.DateOfBirth,
+            AcquiredDate = reptile.AcquiredDate,
+            IsAlive = reptile.IsAlive,
+            Notes = reptile.Notes
+        };
+    }
+
+    private async Task HandleSubmit()
+    {
+        IsSubmitting = true;
+        await ReptileService.UpdateAsync(Request!);
+        NavigationManager.NavigateTo("/reptiles");
+    }
+
+}

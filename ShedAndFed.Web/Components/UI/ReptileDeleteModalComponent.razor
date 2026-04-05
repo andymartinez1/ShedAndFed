@@ -31,7 +31,7 @@
 </Modal>
 
 @code {
-    [Parameter][EditorRequired] public ReptileResponse? Reptile { get; set; }
+    [Parameter] [EditorRequired] public ReptileResponse? Reptile { get; set; }
     [Parameter] public EventCallback OnDeleted { get; set; }
 
     private Modal _modal = default!;
@@ -42,7 +42,7 @@
         return _modal.ShowAsync();
     }
 
-    public Task HideAsync()
+    private Task HideAsync()
     {
         return _modal.HideAsync();
     }
