@@ -76,7 +76,7 @@
     private async Task SelectReptileAsync(ReptileResponse reptile)
     {
         await _modal.HideAsync();
-        NavigationManager.NavigateTo($"/{_logRoute}?reptileId={reptile.ReptileId}");
+        NavigationManager.NavigateTo($"/reptiles/{reptile.ReptileId}/{_logRoute}");
     }
 
 }

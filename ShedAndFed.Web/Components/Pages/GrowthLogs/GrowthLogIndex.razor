@@ -1,6 +1,97 @@
-@page "/growth-logs"
-<h3>GrowthLogIndex</h3>
+@page "/reptiles/{ReptileId:int}/growth-logs"
+@inject IGrowthLogService GrowthLogService
+@inject IReptileService ReptileService
+@using ShedAndFed.ServiceContracts.DTOs.GrowthLogDTOs
+@using ShedAndFed.ServiceContracts.DTOs.ReptileDTOs
+@rendermode InteractiveAuto
+
+<PageTitle>Growth Logs</PageTitle>
+
+<div class="page-header">
+    <div>
+        <h2 class="page-title"><i class="bi bi-graph-up-arrow"></i> Growth Logs</h2>
+        <p class="page-subtitle">@(_reptile?.Name is { Length: > 0 } name ? $"Growth entries for {name}" : "Track weight and length changes")</p>
+    </div>
+    <a href="/reptiles" class="btn btn-primary">
+        <i class="bi bi-arrow-left"></i> Back to Reptiles
+    </a>
+</div>
+
+@if (_isLoading)
+{
+    <div class="empty-state">
+        <div class="empty-state-icon">
+            <i class="bi bi-hourglass-split"></i>
+        </div>
+        <h3>Loading...</h3>
+    </div>
+}
+else if (_reptile is null)
+{
+    <div class="empty-state">
+        <div class="empty-state-icon">
+            <i class="bi bi-exclamation-circle"></i>
+        </div>
+        <h3>Reptile not found</h3>
+        <p>We couldn't find a reptile with this ID.</p>
+        <a href="/reptiles" class="btn btn-primary">
+            <i class="bi bi-arrow-left"></i> Back to Reptiles
+        </a>
+    </div>
+}
+else if (!_growthLogs.Any())
+{
+    <div class="empty-state">
+        <div class="empty-state-icon">
+            <i class="bi bi-graph-up"></i>
+        </div>
+        <h3>No growth logs yet</h3>
+        <p>Add your first growth record for @_reptile.Name.</p>
+    </div>
+}
+else
+{
+    <div class="table-card">
+        <table class="reptile-table">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Weight (g)</th>
+                <th>Length (cm)</th>
+                <th>Notes</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var growthLog in _growthLogs)
+            {
+                <tr>
+                    <td>@growthLog.Date.ToString("MMM d, yyyy")</td>
+                    <td>@(growthLog.WeightGrams?.ToString("0.#") ?? "—")</td>
+                    <td>@(growthLog.LengthCm?.ToString("0.#") ?? "—")</td>
+                    <td>@(growthLog.Notes is { Length: > 0 } ? growthLog.Notes : "—")</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+}
 
 @code {
+    [Parameter]
+    public int ReptileId { get; set; }
 
+    private bool _isLoading = true;
+    private ReptileResponse? _reptile;
+    private List<GrowthLogResponse> _growthLogs = [];
+
+    protected override async Task OnParametersSetAsync()
+    {
+        _isLoading = true;
+        _reptile = await ReptileService.GetByIdAsync(ReptileId);
+        _growthLogs = _reptile is null
+            ? []
+            : await GrowthLogService.GetAllByReptileIdAsync(ReptileId);
+        _growthLogs = _growthLogs.OrderByDescending(g => g.Date).ToList();
+        _isLoading = false;
+    }
 }
